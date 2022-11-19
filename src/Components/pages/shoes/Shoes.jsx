@@ -2,15 +2,18 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Card from "./cards/Card";
 import styled from "styled-components";
+import Spinner from "../../spinner/Spinner";
+
 const Div = styled.div`
    display: flex;
    justify-content: center;
    flex-wrap: wrap;
 `;
-const Shoes = ({listOfShoes}) => {
+const Shoes = ({listOfShoes, setIsLoading, isLoading}) => {
    const [state, setState] = useState([]);
    useEffect(() => {
       const fetchData = async () => {
+         setIsLoading(true);
          try {
             const {data} = await axios.get(
                `https://6377843f5c477765121fffdd.mockapi.io/shoe/`
@@ -21,6 +24,7 @@ const Shoes = ({listOfShoes}) => {
          }
       };
       fetchData();
+      setIsLoading(false);
    }, [listOfShoes]);
 
    return (
@@ -37,6 +41,7 @@ const Shoes = ({listOfShoes}) => {
                ></Card>
             );
          })}
+         {isLoading && <Spinner />}
       </Div>
    );
 };

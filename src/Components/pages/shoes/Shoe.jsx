@@ -3,6 +3,7 @@ import {useParams, Link} from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import EditShoe from "./edit/EditShoe";
+import Spinner from "../../spinner/Spinner";
 const ShoeBox = styled.div`
    width: 100%;
    height: 100vh;
@@ -73,12 +74,20 @@ const Para = styled.p`
 const DescDiv = styled.div`
    width: 80%;
    padding: 5px;
+   margin: 5px;
    text-align: start;
    background: #e0e0e0e7;
    box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
    border-radius: 3px;
 `;
-const Shoe = ({dispatch, filterListOfTasks, changeDone, listOfShoes}) => {
+const Shoe = ({
+   dispatch,
+   filterListOfTasks,
+   changeDone,
+   listOfShoes,
+   isLoading,
+   setIsLoading,
+}) => {
    const [state, setState] = useState("");
    const [brandInput, setBrandInput] = useState("");
    const [modelInput, setModelInput] = useState("");
@@ -90,6 +99,7 @@ const Shoe = ({dispatch, filterListOfTasks, changeDone, listOfShoes}) => {
    const {shoeId} = useParams();
 
    useEffect(() => {
+      setIsLoading(true);
       const fetchData = async () => {
          try {
             const {data} = await axios.get(
@@ -102,6 +112,7 @@ const Shoe = ({dispatch, filterListOfTasks, changeDone, listOfShoes}) => {
          }
       };
       fetchData();
+      setIsLoading(false);
    }, [listOfShoes, shoeId]);
 
    const handleDelete = async () => {
@@ -141,7 +152,6 @@ const Shoe = ({dispatch, filterListOfTasks, changeDone, listOfShoes}) => {
                      : state.description,
                }
             );
-            console.log(shoeId);
             dispatch({
                type: changeDone,
                payload: {
@@ -277,6 +287,7 @@ const Shoe = ({dispatch, filterListOfTasks, changeDone, listOfShoes}) => {
                setModelInput={setModelInput}
             />
          )}
+         {isLoading && <Spinner />}
       </ShoeBox>
    );
 };

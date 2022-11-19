@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import axios from "axios";
+import Spinner from "../../spinner/Spinner";
 const Div = styled.div`
    width: 100%;
    height: calc(100vh + 107px);
@@ -28,7 +29,7 @@ const FormDiv = styled.div`
    z-index: 3;
    /* filter: blur(8px); */
 `;
-const NewShoe = ({dispatch, handleAddShoe}) => {
+const NewShoe = ({dispatch, handleAddShoe, isLoading, setIsLoading}) => {
    const [brandInput, setBrandInput] = useState("");
    const [modelInput, setModelInput] = useState("");
    const [priceInput, setPriceInput] = useState("");
@@ -47,6 +48,7 @@ const NewShoe = ({dispatch, handleAddShoe}) => {
    };
 
    const handleAdd = async () => {
+      setIsLoading(true);
       try {
          if (
             brandInput &&
@@ -69,7 +71,6 @@ const NewShoe = ({dispatch, handleAddShoe}) => {
                   description: descriptionInput,
                }
             );
-            console.log(brand, price, image, size, description, model);
             dispatch({
                type: handleAddShoe,
                payload: {
@@ -86,6 +87,7 @@ const NewShoe = ({dispatch, handleAddShoe}) => {
       } catch (err) {
          console.log(err);
       }
+      setIsLoading(false);
    };
    const cancel = () => {
       clearInputs();
@@ -230,6 +232,7 @@ const NewShoe = ({dispatch, handleAddShoe}) => {
                </button>
             </Link>
          </FormDiv>
+         {isLoading && <Spinner />}
       </Div>
    );
 };
