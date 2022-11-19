@@ -113,7 +113,7 @@ const Shoe = ({
       };
       fetchData();
       setIsLoading(false);
-   }, [listOfShoes, shoeId]);
+   }, [listOfShoes, shoeId,setIsLoading]);
 
    const handleDelete = async () => {
       try {

@@ -25,7 +25,7 @@ const Shoes = ({listOfShoes, setIsLoading, isLoading}) => {
       };
       fetchData();
       setIsLoading(false);
-   }, [listOfShoes]);
+   }, [listOfShoes,setIsLoading]);
 
    return (
       <Div>
