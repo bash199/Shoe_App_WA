@@ -26,14 +26,27 @@ const ShoeDiv = styled.div`
 const Img = styled.img`
    width: 50%;
    height: 70%;
+   margin: 5px;
+   @media (max-width: 768px) {
+      width: 85%;
+   }
 `;
 const ShoeAbout = styled.div`
    width: 30%;
    height: 70%;
+   padding: 5px;
    text-align: start;
    display: flex;
    flex-direction: column;
    justify-content: space-around;
+   /* background-color:rgba(255,255,255,0.8); */
+   background: #e0e0e0e7;
+   box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
+   border-radius: 3px;
+   @media (max-width: 768px) {
+      width: 80%;
+      margin: 5px;
+   }
 `;
 const BtnsDiv = styled.div`
    display: flex;
@@ -60,7 +73,11 @@ const Para = styled.p`
 `;
 const DescDiv = styled.div`
    width: 80%;
+   padding: 5px;
    text-align: start;
+   background: #e0e0e0e7;
+   box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
+   border-radius: 3px;
 `;
 const Shoe = ({dispatch, filterListOfTasks, changeDone, listOfShoes}) => {
    const [state, setState] = useState("");
@@ -71,8 +88,8 @@ const Shoe = ({dispatch, filterListOfTasks, changeDone, listOfShoes}) => {
    const [sizeInput, setSizeInput] = useState("");
    const [descriptionInput, setDescriptionInput] = useState("");
    const [show, setShow] = useState(false);
-
    const {shoeId} = useParams();
+
    useEffect(() => {
       const fetchData = async () => {
          try {
@@ -146,12 +163,14 @@ const Shoe = ({dispatch, filterListOfTasks, changeDone, listOfShoes}) => {
 
    const clearInputs = () => {
       setBrandInput("");
+      setModelInput("");
       setPriceInput("");
       setImageInput("");
       setSizeInput("");
       setDescriptionInput("");
       setModelInput("");
    };
+
    return (
       <ShoeBox>
          <ShoeDiv>
@@ -242,6 +261,7 @@ const Shoe = ({dispatch, filterListOfTasks, changeDone, listOfShoes}) => {
          </DescDiv>
          {show && (
             <EditShoe
+               clearInputs={clearInputs}
                descriptionInput={descriptionInput}
                setDescriptionInput={setDescriptionInput}
                sizeInput={sizeInput}

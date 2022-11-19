@@ -8,6 +8,7 @@ import Shoe from "./pages/shoes/Shoe";
 import Navbar from "./navBar/Navbar";
 import Error404 from "./pages/error/Error404";
 import {ACTIONS} from "../utils/reducer";
+import NewShoe from "./pages/shoes/NewShoe";
 function App() {
    const [listOfShoes, dispatch] = useReducer(
       reducer,
@@ -31,6 +32,16 @@ function App() {
             <Route
                path="/shoes"
                element={<Shoes listOfShoes={listOfShoes} />}
+            />
+            <Route
+               path="/newshoe"
+               element={
+                  <NewShoe
+                     dispatch={dispatch}
+                     handleAddShoe={ACTIONS.HANDLEADD}
+                     listOfShoes={listOfShoes}
+                  />
+               }
             />
             <Route
                path="/shoes/:shoeId"

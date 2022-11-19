@@ -3,7 +3,7 @@ import "./edit.css";
 import styled from "styled-components";
 const Div = styled.div`
    width: 100%;
-   height: 100vh;
+   height: calc(100vh + 107px);
    position: absolute;
    top: 0;
    left: 0;
@@ -42,6 +42,7 @@ const EditShoe = ({
    handleDone,
    modelInput,
    setModelInput,
+   clearInputs,
 }) => {
    const cancel = () => {
       setShow((prev) => !prev);
@@ -115,7 +116,13 @@ const EditShoe = ({
                />
                <span className="input-border"></span>
             </div>
-            <button onClick={cancel} className="cta">
+            <button
+               onClick={() => {
+                  cancel();
+                  clearInputs();
+               }}
+               className="cta"
+            >
                <span className="hover-underline-animation"> Cancel </span>
                <svg
                   className="arrow"

@@ -23,6 +23,9 @@ function Navbar() {
                <li>
                   <Link to="/shoes">Shoes</Link>
                </li>
+               <li>
+                  <Link to="/newshoe">New Shoe</Link>
+               </li>
             </ul>
          </div>
       </nav>
