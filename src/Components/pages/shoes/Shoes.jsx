@@ -1,21 +1,44 @@
-import React,{useEffect} from 'react'
+import React, {useEffect, useState} from "react";
 import axios from "axios";
-import Card from './cards/Card';
-import styled from 'styled-components';
+import Card from "./cards/Card";
+import styled from "styled-components";
 const Div = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+   display: flex;
+   justify-content: center;
+   flex-wrap: wrap;
 `;
 const Shoes = ({listOfShoes}) => {
+   const [state, setState] = useState([]);
+   useEffect(() => {
+      const fetchData = async () => {
+         try {
+            const {data} = await axios.get(
+               `https://6377843f5c477765121fffdd.mockapi.io/shoe/`
+            );
+            setState(data);
+         } catch (err) {
+            console.log(err);
+         }
+      };
+      fetchData();
+   }, [listOfShoes]);
 
-  return (
-    <Div>
-      {listOfShoes.map(({price,image,brand,id})=>{
-        return <Card id={id} price={price} image={image} brand={brand}  key={id}></Card>
-      })}
-    </Div>
-  )
-}
+   return (
+      <Div>
+         {state.map(({price, image, brand, id, model}) => {
+            return (
+               <Card
+                  model={model}
+                  id={id}
+                  price={price}
+                  image={image}
+                  brand={brand}
+                  key={id}
+               ></Card>
+            );
+         })}
+      </Div>
+   );
+};
 
-export default Shoes
+export default Shoes;

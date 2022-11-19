@@ -17,7 +17,7 @@ const Div = styled.div`
 `;
 const FormDiv = styled.div`
    width: 60%;
-   height: 50%;
+   height: 60%;
    background: rgba(255, 255, 255, 0.7);
    display: flex;
    flex-direction: column;
@@ -27,9 +27,9 @@ const FormDiv = styled.div`
    z-index: 3;
    /* filter: blur(8px); */
 `;
-const EditShoe = ({setShow}) => {
+const EditShoe = ({setShow, setBrandInput, brandInput, setPriceInput, priceInput,setImageInput,imageInput,setSizeInput,sizeInput,descriptionInput,setDescriptionInput,handleDone,modelInput,setModelInput}) => {
    const cancel = () => {
-      setShow(prev=>!prev)
+      setShow((prev) => !prev);
    };
    return (
       <Div>
@@ -38,8 +38,21 @@ const EditShoe = ({setShow}) => {
                <input
                   className="input"
                   placeholder="Shoe Brand"
-                  required=""
+                  required=" "
                   type="text"
+                  value={brandInput}
+                  onChange={({target: {value}}) => setBrandInput(value)}
+               />
+               <span className="input-border"></span>
+            </div>
+            <div className="form">
+               <input
+                  className="input"
+                  placeholder="Shoe Model"
+                  required=" "
+                  type="text"
+                  value={modelInput}
+                  onChange={({target: {value}}) => setModelInput(value)}
                />
                <span className="input-border"></span>
             </div>
@@ -49,6 +62,8 @@ const EditShoe = ({setShow}) => {
                   placeholder="Shoe Price"
                   required=""
                   type="text"
+                  value={priceInput}
+                  onChange={({target: {value}}) => setPriceInput(value)}
                />
                <span className="input-border"></span>
             </div>
@@ -58,6 +73,19 @@ const EditShoe = ({setShow}) => {
                   placeholder="Shoe Image"
                   required=""
                   type="text"
+                  value={imageInput}
+                  onChange={({target: {value}}) => setImageInput(value)}
+               />
+               <span className="input-border"></span>
+            </div>
+            <div className="form">
+               <input
+                  className="input"
+                  placeholder="Shoe Size"
+                  required=""
+                  type="text"
+                  value={sizeInput}
+                  onChange={({target: {value}}) => setSizeInput(value)}
                />
                <span className="input-border"></span>
             </div>
@@ -67,6 +95,8 @@ const EditShoe = ({setShow}) => {
                   placeholder="Shoe Description"
                   required=""
                   type="text"
+                  value={descriptionInput}
+                  onChange={({target: {value}}) => setDescriptionInput(value)}
                />
                <span className="input-border"></span>
             </div>
@@ -88,7 +118,10 @@ const EditShoe = ({setShow}) => {
                   ></path>
                </svg>
             </button>
-            <button className="cta">
+            <button onClick={()=>{
+               handleDone()
+               cancel()
+               }} className="cta">
                <span className="hover-underline-animation"> Save </span>
                <svg
                   className="arrow"

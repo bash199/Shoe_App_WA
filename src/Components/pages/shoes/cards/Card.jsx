@@ -3,23 +3,26 @@ import styled from "styled-components";
 import "./card.css";
 import {Link, Route, Routes} from "react-router-dom";
 const CardBox = styled.div`
-   width: 250px;
-   height: 280px;
+   width: 270px;
+   height: 500px;
    border: solid balck 2px;
    margin: 5px;
-   padding: 5px;
+   padding: 7px;
    display: flex;
    flex-direction: column;
    align-items: center;
+   background: #e0e0e0e7;
+   box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
+   border-radius: 3px;
 `;
 const Image = styled.img`
    width: 100%;
-   height: 70%;
+   height: 100%;
 `;
 const AboutShoeBox = styled.div`
-   width: 20%;
-   height: 20%;
-   text-align: center;
+   width: 100%;
+   height: 30%;
+   text-align: start;
 `;
 const H5 = styled.h5`
    margin: 2px;
@@ -32,12 +35,13 @@ const Para = styled.p`
    color: #b02d2da1;
 `;
 
-const Card = ({brand, image, price, id}) => {
+const Card = ({brand, image, price, id, model}) => {
    return (
       <CardBox>
          <Image src={image} />
          <AboutShoeBox>
             <H5>{brand}</H5>
+            <Para>{model}</Para>
             <Para>${Math.floor(price)}</Para>
          </AboutShoeBox>
          <Link to={`/shoes/${id}`}>

@@ -29,7 +29,8 @@ function App() {
          <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/shoes" element={<Shoes listOfShoes={listOfShoes}/>} />
-            <Route path="/shoes/:shoeId" element={<Shoe dispatch={dispatch} filterListOfTasks={ACTIONS.FILTERLISTOFTASKS}/>} />
+            <Route path="/shoes/:shoeId" element={<Shoe dispatch={dispatch} filterListOfTasks={ACTIONS.FILTERLISTOFTASKS}
+            changeDone={ACTIONS.CHANGEDONE} listOfShoes={listOfShoes}/>} />
             <Route path="*" element={<Error404 />} />
          </Routes>
       </div>

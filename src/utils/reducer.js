@@ -1,7 +1,7 @@
- export const ACTIONS = {
+export const ACTIONS = {
    HANDLEADD: "handleAdd",
    CHANGEDONE: "changeDone",
-   FILTERLISTOFTASKS: "filterListOfTasks",
+   FILTERLISTOFTASKS: "filterListOfShoes",
 };
 export const reducer = (listOfShoes, action) => {
    setToLocalStorage(listOfShoes);
@@ -23,8 +23,16 @@ export const reducer = (listOfShoes, action) => {
    }
 };
 
-const newTask = ({model, image, id}) => {
-   return {model: model, image: image, id: id};
+const newTask = ({brand, image, id, price, size, description, model}) => {
+   return {
+      brand: brand,
+      price: price,
+      size: size,
+      description: description,
+      image: image,
+      id: id,
+      model: model,
+   };
 };
 export const setToLocalStorage = (arr) => {
    const dataToLS = JSON.stringify(arr);

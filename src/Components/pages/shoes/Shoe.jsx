@@ -33,7 +33,11 @@ const ShoeAbout = styled.div`
    flex-direction: column;
    justify-content: space-around;
 `;
-const BtnsDiv = styled.div``;
+const BtnsDiv = styled.div`
+   display: flex;
+   justify-content: center;
+   flex-wrap: wrap;
+`;
 const Btn = styled.button``;
 const H5 = styled.h1`
    margin: 2px;
@@ -56,12 +60,14 @@ const DescDiv = styled.div`
    text-align: start;
 `;
 
-const Shoe = ({dispatch, filterListOfTasks}) => {
+const Shoe = ({dispatch, filterListOfTasks, changeDone, listOfShoes}) => {
    const [state, setState] = useState("");
-   const [brand, setBrand] = useState("");
-   const [price, setPrice] = useState("");
-   const [image, setImage] = useState("");
-   const [size, setSize] = useState("");
+   const [brandInput, setBrandInput] = useState("");
+   const [modelInput, setModelInput] = useState("");
+   const [priceInput, setPriceInput] = useState("");
+   const [imageInput, setImageInput] = useState("");
+   const [sizeInput, setSizeInput] = useState("");
+   const [descriptionInput, setDescriptionInput] = useState("");
    const [show, setShow] = useState(false);
 
    const {shoeId} = useParams();
@@ -78,7 +84,7 @@ const Shoe = ({dispatch, filterListOfTasks}) => {
          }
       };
       fetchData();
-   }, []);
+   }, [listOfShoes]);
 
    const handleDelete = async () => {
       try {
@@ -90,20 +96,77 @@ const Shoe = ({dispatch, filterListOfTasks}) => {
          console.log(err.message);
       }
    };
-   
+
+   const handleDone = async () => {
+      console.log(shoeId);
+      if (
+         brandInput ||
+         priceInput ||
+         imageInput ||
+         sizeInput ||
+         descriptionInput||
+         modelInput
+      ) {
+         try {
+            const {
+               data: {brand, price, image, size, description,model},
+            } = await axios.put(
+               `https://6377843f5c477765121fffdd.mockapi.io/shoe/${shoeId}`,
+               {
+                  brand: brandInput ? brandInput : state.brand,
+                  model: modelInput ? modelInput : state.model,
+                  price: priceInput ? priceInput : state.price,
+                  image: imageInput ? imageInput : state.image,
+                  size: sizeInput ? sizeInput : state.size,
+                  description: descriptionInput
+                     ? descriptionInput
+                     : state.description,
+               }
+            );
+            console.log(shoeId);
+            dispatch({
+               type: changeDone,
+               payload: {
+                  brand: brand,
+                  price: price,
+                  size: size,
+                  description: description,
+                  image: image,
+                  model:model
+               },
+            });
+            clearInputs();
+         } catch (err) {
+            console.log(err);
+         }
+      }
+   };
+
+   const clearInputs = () => {
+      setBrandInput("");
+      setPriceInput("");
+      setImageInput("");
+      setSizeInput("");
+      setDescriptionInput("");
+      setModelInput("");
+   };
    return (
       <ShoeBox>
          <ShoeDiv>
             <ShoeAbout>
                <div>
                   <H5>{state.brand}</H5>
-                  <Para>Price: {Math.floor(state.price)}</Para>
-                  <Para>{state.size}</Para>
+                  <Para>{state.model}</Para>
+                  <Para>Price: ${Math.floor(state.price)}</Para>
+                  <Para>Size: {state.size}</Para>
                </div>
                <BtnsDiv>
-                  <button onClick={()=>{
-                    setShow(true)
-                  }} className="cta">
+                  <button
+                     onClick={() => {
+                        setShow(true);
+                     }}
+                     className="cta"
+                  >
                      <span className="hover-underline-animation"> EDIT </span>
                      <svg
                         className="arrow"
@@ -143,15 +206,52 @@ const Shoe = ({dispatch, filterListOfTasks}) => {
                         </svg>
                      </Link>
                   </button>
+                  <button className="cta">
+                     <Link to={"/shoes"}>
+                        <span className="hover-underline-animation">BACK</span>
+                        <svg
+                           className="arrow"
+                           viewBox="0 0 46 16"
+                           height="10"
+                           width="30"
+                           xmlns="http://www.w3.org/2000/svg"
+                           id="arrow-horizontal"
+                        >
+                           <path
+                              transform="translate(30)"
+                              d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+                              data-name="Path 10"
+                              id="Path_10"
+                           ></path>
+                        </svg>
+                     </Link>
+                  </button>
                </BtnsDiv>
             </ShoeAbout>
             <Img src={state.image} />
          </ShoeDiv>
          <DescDiv>
             <H6>Description:</H6>
-            <Para>{state.decription}</Para>
+            <Para>{state.description}</Para>
          </DescDiv>
-         {show && <EditShoe setShow={setShow}/>}
+         {show && (
+            <EditShoe
+               descriptionInput={descriptionInput}
+               setDescriptionInput={setDescriptionInput}
+               sizeInput={sizeInput}
+               setSizeInput={setSizeInput}
+               imageInput={imageInput}
+               setImageInput={setImageInput}
+               priceInput={priceInput}
+               setPriceInput={setPriceInput}
+               setBrandInput={setBrandInput}
+               brandInput={brandInput}
+               setShow={setShow}
+               handleDone={handleDone}
+               modelInput={modelInput}
+               setModelInput={setModelInput}
+            />
+         )}
       </ShoeBox>
    );
 };
