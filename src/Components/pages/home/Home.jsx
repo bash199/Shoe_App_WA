@@ -58,6 +58,7 @@ const Home = () => {
                <a
                   href="https://main--spiffy-starlight-c26589.netlify.app/"
                   target="_blank"
+                  rel="noreferrer"
                >
                   <Img src={img} alt="Tic Tac Toe" />
                </a>
