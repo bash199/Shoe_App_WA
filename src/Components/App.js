@@ -12,7 +12,7 @@ import NewShoe from "./pages/shoes/NewShoe";
 function App() {
    const [listOfShoes, dispatch] = useReducer(
       reducer,
-      JSON.parse(localStorage.listOfShoes) ?? []
+      localStorage.listOfShoes ? JSON.parse(localStorage.listOfShoes) : []
    );
    useEffect(() => {
       const fetchData = async () => {
