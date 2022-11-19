@@ -10,6 +10,7 @@ const ShoeBox = styled.div`
    flex-direction: column;
    justify-content: space-around;
    align-items: center;
+   color: #b02d2da1;
 `;
 const ShoeDiv = styled.div`
    width: 100%;
@@ -17,6 +18,7 @@ const ShoeDiv = styled.div`
    display: flex;
    justify-content: space-around;
    align-items: center;
+   color: #b02d2da1;
    @media (max-width: 768px) {
       flex-direction: column;
    }
@@ -42,24 +44,24 @@ const Btn = styled.button``;
 const H5 = styled.h1`
    margin: 2px;
    font-size: 2rem;
-   color: #333;
+
+   color: #b02d2da1;
 `;
 const H6 = styled.h1`
    margin: 2px;
    font-size: 1.5rem;
-   color: #333;
+   color: #b02d2da1;
 `;
 const Para = styled.p`
    margin: 2px;
    font-weight: 500;
    font-size: 1.2rem;
-   color: #333;
+   color: #b02d2da1;
 `;
 const DescDiv = styled.div`
    width: 80%;
    text-align: start;
 `;
-
 const Shoe = ({dispatch, filterListOfTasks, changeDone, listOfShoes}) => {
    const [state, setState] = useState("");
    const [brandInput, setBrandInput] = useState("");
@@ -104,12 +106,12 @@ const Shoe = ({dispatch, filterListOfTasks, changeDone, listOfShoes}) => {
          priceInput ||
          imageInput ||
          sizeInput ||
-         descriptionInput||
+         descriptionInput ||
          modelInput
       ) {
          try {
             const {
-               data: {brand, price, image, size, description,model},
+               data: {brand, price, image, size, description, model},
             } = await axios.put(
                `https://6377843f5c477765121fffdd.mockapi.io/shoe/${shoeId}`,
                {
@@ -132,7 +134,7 @@ const Shoe = ({dispatch, filterListOfTasks, changeDone, listOfShoes}) => {
                   size: size,
                   description: description,
                   image: image,
-                  model:model
+                  model: model,
                },
             });
             clearInputs();
@@ -157,7 +159,7 @@ const Shoe = ({dispatch, filterListOfTasks, changeDone, listOfShoes}) => {
                <div>
                   <H5>{state.brand}</H5>
                   <Para>{state.model}</Para>
-                  <Para>Price: ${Math.floor(state.price)}</Para>
+                  <Para>Price: ${state.price}</Para>
                   <Para>Size: {state.size}</Para>
                </div>
                <BtnsDiv>
@@ -185,7 +187,11 @@ const Shoe = ({dispatch, filterListOfTasks, changeDone, listOfShoes}) => {
                      </svg>
                   </button>
                   <button className="cta">
-                     <Link to={"/shoes"} onClick={handleDelete}>
+                     <Link
+                        to={"/shoes"}
+                        onClick={handleDelete}
+                        className="link"
+                     >
                         <span className="hover-underline-animation">
                            DELETE
                         </span>
@@ -207,7 +213,7 @@ const Shoe = ({dispatch, filterListOfTasks, changeDone, listOfShoes}) => {
                      </Link>
                   </button>
                   <button className="cta">
-                     <Link to={"/shoes"}>
+                     <Link to={"/shoes"} className="link">
                         <span className="hover-underline-animation">BACK</span>
                         <svg
                            className="arrow"

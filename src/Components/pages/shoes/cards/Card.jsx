@@ -3,7 +3,7 @@ import styled from "styled-components";
 import "./card.css";
 import {Link, Route, Routes} from "react-router-dom";
 const CardBox = styled.div`
-   width: 270px;
+   width: 300px;
    height: 500px;
    border: solid balck 2px;
    margin: 5px;
@@ -42,7 +42,7 @@ const Card = ({brand, image, price, id, model}) => {
          <AboutShoeBox>
             <H5>{brand}</H5>
             <Para>{model}</Para>
-            <Para>${Math.floor(price)}</Para>
+            <Para>${price}</Para>
          </AboutShoeBox>
          <Link to={`/shoes/${id}`}>
             <button className="cta">

@@ -27,7 +27,22 @@ const FormDiv = styled.div`
    z-index: 3;
    /* filter: blur(8px); */
 `;
-const EditShoe = ({setShow, setBrandInput, brandInput, setPriceInput, priceInput,setImageInput,imageInput,setSizeInput,sizeInput,descriptionInput,setDescriptionInput,handleDone,modelInput,setModelInput}) => {
+const EditShoe = ({
+   setShow,
+   setBrandInput,
+   brandInput,
+   setPriceInput,
+   priceInput,
+   setImageInput,
+   imageInput,
+   setSizeInput,
+   sizeInput,
+   descriptionInput,
+   setDescriptionInput,
+   handleDone,
+   modelInput,
+   setModelInput,
+}) => {
    const cancel = () => {
       setShow((prev) => !prev);
    };
@@ -118,10 +133,13 @@ const EditShoe = ({setShow, setBrandInput, brandInput, setPriceInput, priceInput
                   ></path>
                </svg>
             </button>
-            <button onClick={()=>{
-               handleDone()
-               cancel()
-               }} className="cta">
+            <button
+               onClick={() => {
+                  handleDone();
+                  cancel();
+               }}
+               className="cta"
+            >
                <span className="hover-underline-animation"> Save </span>
                <svg
                   className="arrow"

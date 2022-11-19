@@ -25,13 +25,11 @@
 
 .cta:active svg {
    transform: scale(0.9);
-   /* background-color: #b02d2da1; */
 }
 
 .hover-underline-animation {
    position: relative;
    color: black;
-   /* color: #b02d2da1; */
    padding-bottom: 20px;
 }
 
@@ -52,4 +50,7 @@
 .cta:hover .hover-underline-animation:after {
    transform: scaleX(1);
    transform-origin: bottom left;
+}
+.link{
+   text-decoration: none;
 }
