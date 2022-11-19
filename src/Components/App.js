@@ -1,5 +1,5 @@
-import {React, useState, useReducer, useEffect} from "react";
-import {Link, Route, Routes} from "react-router-dom";
+import {React, useReducer, useEffect} from "react";
+import {Route, Routes} from "react-router-dom";
 import axios from "axios";
 import {reducer, setToLocalStorage} from "../utils/reducer";
 import Home from "./pages/home/Home";

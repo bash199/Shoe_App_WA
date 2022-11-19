@@ -53,7 +53,6 @@ const BtnsDiv = styled.div`
    justify-content: center;
    flex-wrap: wrap;
 `;
-const Btn = styled.button``;
 const H5 = styled.h1`
    margin: 2px;
    font-size: 2rem;
@@ -103,7 +102,7 @@ const Shoe = ({dispatch, filterListOfTasks, changeDone, listOfShoes}) => {
          }
       };
       fetchData();
-   }, [listOfShoes]);
+   }, [listOfShoes, shoeId]);
 
    const handleDelete = async () => {
       try {

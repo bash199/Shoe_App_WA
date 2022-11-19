@@ -1,8 +1,7 @@
-import React, {useState, useForm} from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import axios from "axios";
-import EditShoe from "./edit/EditShoe";
 const Div = styled.div`
    width: 100%;
    height: calc(100vh + 107px);

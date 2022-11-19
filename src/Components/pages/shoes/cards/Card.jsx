@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import "./card.css";
-import {Link, Route, Routes} from "react-router-dom";
+import {Link} from "react-router-dom";
 const CardBox = styled.div`
    width: 300px;
    height: 500px;
